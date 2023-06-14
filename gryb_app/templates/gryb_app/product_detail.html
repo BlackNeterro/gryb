@@ -1,0 +1,131 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<br><br><br>
+<div class="container">
+  <div class="card-wrapper">
+      <div class="row align-items-center">
+          <div class="col-12 col-lg-6">
+              <div class="image-wrapper">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}">
+              </div>
+          </div>
+          <div class="col-12 col-lg">
+              <div class="text-box">
+                  <h5 class="mbr-title mbr-fonts-style display-2"><strong>{{ product.name }}</strong></h5>
+                  <p class="mbr-text mbr-fonts-style display-7">{{ product.group }}&nbsp;<br><br></p>
+                  <div class="cost">
+                      <span class="currentcost mbr-fonts-style pr-2 display-2">{{ product.price|floatformat:0 }} ₸</span>
+                      <span class="oldcost mbr-fonts-style display-2"></span>
+                  </div>
+                  <br>
+                  <div>
+                  <form method="POST" class="mbr-text mbr-fonts-style display-7" action="{% url 'gryb_app:add_to_cart' pk=product.pk %}">
+                    {% csrf_token %}
+                    {{ cart_form.as_p }}
+                  <button type="submit" class="btn btn-primary display-4">Заказать</button></form></div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</section>
+
+<section data-bs-version="5.1" class="content5 cid-sUzS01KuhW" id="content5-1i">
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+          
+          <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5"><strong>
+              Описание</strong></h4>
+          <p class="mbr-text mbr-fonts-style display-7">{{ product.description }}<br></p>
+      </div>
+  </div>
+</div>
+</section>
+
+<section data-bs-version="5.1" class="content6 cid-sUzS027ZXD" id="content6-1j">
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+          <hr class="line">
+          <p class="mbr-text align-center mbr-fonts-style my-4 display-7"><strong>Состав:</strong>&nbsp;<br><br> {{ product.compound }} <br></p>
+          <hr class="line">
+      </div>
+  </div>
+</div>
+</section>
+
+<section data-bs-version="5.1" class="content5 cid-sUzS02sBrL" id="content5-1k">
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+          
+          <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-7"><strong>Показания к применению</strong></h4>
+          <p class="mbr-text mbr-fonts-style display-7">{{ product.application }}<br></p>
+      </div>
+  </div>
+</div>
+</section>
+
+<section data-bs-version="5.1" class="content6 cid-sUzS03rimo" id="content6-1m">
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-10">
+          <hr class="line">
+          <p class="mbr-text align-center mbr-fonts-style my-4 display-5"><strong>Противопоказания:
+</strong><br>{{ product.contraindications }}</p>
+          <hr class="line">
+      </div>
+  </div>
+</div>
+</section>
+
+<section data-bs-version="5.1" class="content7 cid-sUzXeEz2SO" id="content7-1o">
+
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-12 col-md-10">
+          <blockquote>
+          <h5 class="mbr-section-title mbr-fonts-style mb-2 display-7"><strong>Способ приминения и дозировка:</strong></h5>
+          <p class="mbr-text mbr-fonts-style display-4">{{ product.doza }}<br></p></blockquote>
+      </div>
+  </div>
+</div>
+</section>
+<!-- Co -mments -->
+<section data-bs-version="5.1" class="content5 cid-sUzS02sBrL" id="content5-1k">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-10">
+                
+                <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-7"><strong>Комментарии</strong></h4>
+                {% for comment in comments %}
+                <p class="mbr-text mbr-fonts-style display-7">{{ comment.text }}</p>
+                <p>Автор: {{ comment.user.username }}</p>
+                {% empty %}
+                <p class="mbr-text mbr-fonts-style display-7">Пока нет комментариев</p>
+                {% endfor %}
+                
+                <h4 class="mbr-section-subtitle mbr-fonts-style mb-4 display-7"><strong>Добавить комментарий</strong></h4>
+                <form method="POST" action="{% url 'gryb_app:add_comment' pk=product.pk %}" class="mbr-section-subtitle mbr-fonts-style mb-4 display-7">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ comment_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary display-4">Добавить комментарий</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    
+    {% endblock %}
+

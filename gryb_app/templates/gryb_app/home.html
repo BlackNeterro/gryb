@@ -1,0 +1,401 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+  <br><br><br>
+
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Verdana, sans-serif;
+        margin: 0;
+      }
+
+      .carousel-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-inner .item {
+        display: none;
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .carousel-inner .item.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .carousel-inner img {
+        width: 80%;
+        height: auto;
+      }
+
+      .carousel-caption {
+        position: absolute;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        color: #fff;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .carousel-caption h3 {
+        margin: 0;
+      }
+
+      .carousel-inner .item:not(.active) .carousel-caption {
+        display: none;
+      }
+
+      .title {
+  font-family: 'Jost', sans-serif;
+  font-size: 4.6rem;
+  color: #ffffff;
+  line-height: 44px;
+}
+
+.title span {
+  display: inline;
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 20px 20px rgba(0, 0, 0, 0.5), 0px 0 0 rgba(0, 0, 0, 0.5);
+  padding: 0 0% 0 0;
+  color: #FFFFFF;
+  line-height: 14px;
+  font-size: 66px;
+}
+
+@media (max-width: 768px) {
+  /* Применяем стили для устройств с шириной экрана до 768px */
+  .title {
+    font-size: 3.2rem;
+    line-height: 32px;
+  }
+
+  .title span {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Применяем стили для устройств с шириной экрана до 480px */
+  .title {
+    font-size: 2.6rem;
+    line-height: 26px;
+  }
+
+  .title span {
+    font-size: 18px;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="carousel-inner">
+      {% for image in carousel_images %}
+      <div class="item {% if forloop.first %}active{% endif %}">
+        <img src="{{ image.image.url }}" alt="{{ image.caption }}" class="w-100">
+        <div class="carousel-caption">
+          <h3>{{ image.caption }}</h3>
+          <h1 class="title"><span>{{ image.text }}</span></h1>
+          {% if image.link %}
+          <a class="btn btn-secondary display-7" href="{{ image.link }}">{{ image.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <script>
+      var carouselItems = document.querySelectorAll('.carousel-inner .item');
+      var currentItem = 0;
+
+      function showNextItem() {
+        carouselItems[currentItem].classList.remove('active');
+        currentItem = (currentItem + 1) % carouselItems.length;
+        carouselItems[currentItem].classList.add('active');
+      }
+
+      setInterval(showNextItem, 3000); // Изменяем каждые 3 секунды
+    </script>
+  </body>
+
+  <br><br>
+
+  <div class="mbr-section-head">
+    <h2 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">Ознакомьтесь с нашей продукцией</h2>
+  </div>
+
+  <br><br>
+  <div class="container">
+  <div class="row">
+    {% for product in products %}
+    <div class="col-12 col-md-4">
+      <div class="item-wrapper">
+        <div class="item-img">
+          <a href="{% url 'gryb_app:product_detail' pk=product.pk %}">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          </a>
+        </div>
+        <div class="item-content">
+          <span class="item-title mbr-fonts-style display-7"><strong>{{ product.name }}</strong></span>
+          <p class="mbr-text mbr-fonts-style mt-3 display-7">{{ product.group }}</p>
+        </div>
+        <div class="mbr-section-btn item-footer mt-2">
+          <a href="{% url 'gryb_app:product_detail' pk=product.pk %}" class="btn item-btn btn-secondary display-7">Подробнее</a>
+        </div>
+      </div>
+    </div>
+    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+  
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<section data-bs-version="5.1" class="features20 cid-sUAQ2SPdBH" id="features21-1t">
+</body>
+    
+<section data-bs-version="5.1" class="features22 cid-sNZf1L6QHH" id="features23-6">
+<div class="container">
+    <div class="row justify-content-center content-row mt-4">
+          <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+              <div class="card-box">
+                  <div class="title">
+                      <span1 class="num mbr-fonts-style"><strong>01.</strong></span1>
+                  </div>
+                  <span  class="card-title mbr-fonts-style display-5">
+                      <strong>Свяжитесь с нами</strong></span >
+                  <p class="mbr-text card-text mbr-fonts-style display-7">
+                      Напишите нам на Whatsapp или в Телеграм и мы оформим ваш заказ</p>
+              </div>
+          </div>
+          <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+              <div class="card-box">
+                  <div class="title">
+                      <span1 class="num mbr-fonts-style"><strong>02.</strong></span1>
+                  </div>
+                  <span  class="card-title mbr-fonts-style display-5"><strong>Оплата</strong></span >
+                  <p class="mbr-text card-text mbr-fonts-style display-7">
+                      Принимаем оплату наличными или переводом на карту&nbsp;</p>
+              </div>
+          </div>
+          <div class="card p-4 p-md-3 col-md-6 col-lg-4">
+              <div class="card-box">
+                  <div class="title">
+                      <span1 class="num mbr-fonts-style"><strong>03.</strong></span1>
+                  </div>
+                  <span  class="card-title mbr-fonts-style display-5">
+                      <strong>Доставка</strong></span >
+                  <p class="mbr-text card-text mbr-fonts-style display-7">
+                      В Алматы и Астане: в течении дня. В регионы:&nbsp; посылкой или курьером в течении 3-х дней</p>
+              </div>
+          </div>
+
+      </div>
+  </div>
+
+<br> <br>
+
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-12">
+            <div class="card-wrapper mb-4">
+                <div class="card-box align-center">
+                    <h2 class="card-title mbr-fonts-style mb-4 display-2">Процесс производства</h2>
+                </div>
+            </div>
+        </div>
+            <div class="col-12 col-md-11">
+        <div class="item mbr-flex">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                    <strong>Мы собираем грибы в лесах</strong>
+                </span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">В Приозерском районе Ленобласти, а также в Карелии (Северное Приладожье), Архангельской, Тверской, Вологодской, Новгородской, Псковской областях и в Республике Беларусь</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">1</span>
+                </div>
+            </div>
+        </div>
+        <div class="item mbr-flex">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                    <strong>Грибы сушим в специальном аппарате</strong>
+                </span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">Грибы сушатся по специальной технологии, методом двойного («сквозного») холодного обдува, при t до 35°; продолжительность аппаратной сушки при этом может достигать 3-х суток (затем ещё следует финальное досушивание). Данная технология позволяет сохранять все лечебные свойства данного гриба.</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">2</span>
+                </div>
+            </div>
+        </div>
+        <div class="item mbr-flex">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                    <strong>Высушеные грибы упаковываем в герметичную тару</strong>
+                </span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">Хранятся заготовленные грибы в тёмном, прохладном и сухом месте, герметично закрытые.&nbsp;</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">3</span>
+                </div>
+            </div>
+        </div>
+        <div class="item mbr-flex">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Грибы перемалываем блендером в порошок</strong></span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">Непосредственно перед фасовкой перемалываются на профессиональном оборудовании</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">4</span>
+                </div>
+            </div>
+        </div>
+        <div class="item mbr-flex">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                    <strong>Порошок капсулируем</strong>
+                </span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">С соблюдением всех нормативов стерильности</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">5</span>
+                </div>
+            </div>
+        </div>
+        <div class="item mbr-flex last">
+            <div class="text-box">
+                <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                    <strong>И упаковываем</strong>
+                </span>
+                <span class="icon-text mbr-black mbr-fonts-style display-4">Пакуются в ПЭ-банку либо zip-lock пакет + бумажный крафт-пакет</span>
+            </div>
+            <div class="icon-wrap w-100">
+                <div class="icon-box">
+                    <span class="step-number mbr-fonts-style display-5">6</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-lg-12">
+                <div class="card-wrapper mb-4">
+                    <div class="card-box align-center">
+                        <h2 class="card-title mbr-fonts-style mb-4 display-2">Процесс производства</h2>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-md-11">
+                <div class="item mbr-flex">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">1</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                            <strong>Мы собираем грибы в лесах</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">В Приозерском районе Ленобласти, а также в Карелии (Северное Приладожье), Архангельской, Тверской, Вологодской, Новгородской, Псковской областях и в Республике Беларусь</span>
+                    </div>
+                </div>
+                <div class="item mbr-flex">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">2</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                            <strong>Грибы сушим в специальном аппарате</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">Грибы сушатся по специальной технологии, методом двойного («сквозного») холодного обдува, при t до 35°; продолжительность аппаратной сушки при этом может достигать 3-х суток (затем ещё следует финальное досушивание). Данная технология позволяет сохранять все лечебные свойства данного гриба.</span>
+                    </div>
+                </div>
+                <div class="item mbr-flex">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">3</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                            <strong>Высушеные грибы упаковываем в герметичную тару</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">Хранятся заготовленные грибы в тёмном, прохладном и сухом месте, герметично закрытые.&nbsp;</span>
+                    </div>
+                </div>
+                <div class="item mbr-flex">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">4</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7"><strong>Грибы перемалываем блендером в порошок</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">Непосредственно перед фасовкой перемалываются на профессиональном оборудовании</span>
+                    </div>
+                </div>
+                <div class="item mbr-flex">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">5</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                            <strong>Порошок капсулируем</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">С соблюдением всех нормативов стерильности</span>
+                    </div>
+                </div>
+                <div class="item mbr-flex last">
+                    <div class="icon-wrap w-100">
+                        <div class="icon-box">
+                            <span class="step-number mbr-fonts-style display-5">6</span>
+                        </div>
+                    </div>
+                    <div class="text-box">
+                        <span class="icon-title card-title mbr-black mbr-fonts-style display-7">
+                            <strong>И упаковываем</strong></span>
+                        <span class="icon-text mbr-black mbr-fonts-style display-4">Пакуются в ПЭ-банку либо zip-lock пакет + бумажный крафт-пакет</span>
+                    </div>
+                </div>
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

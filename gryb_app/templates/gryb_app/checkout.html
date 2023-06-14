@@ -1,0 +1,66 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container">
+    <div class="card-wrapper">
+        
+<h1>Оформление заказа</h1>
+  
+<h2>Товары в корзине:</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Количество</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in cart_items %}
+        <tr>
+            <td>{{ item.item.name }}</td>
+            <td>{{ item.quantity }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+  
+<h2>Общая стоимость: {{ total }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="postal_code">Почтовый индекс:</label>
+        <input type="text" id="postal_code" name="postal_code" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="city">Город:</label>
+        <input type="text" id="city" name="city" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="address">Адрес:</label>
+        <input type="text" id="address" name="address" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="recipient_name">Имя получателя:</label>
+        <input type="text" id="recipient_name" name="recipient_name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="recipient_phone">Номер телефона получателя:</label>
+        <input type="text" id="recipient_phone" name="recipient_phone" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="recipient_email">Емайл получателя:</label>
+        <input type="email" id="recipient_email" name="recipient_email" class="form-control">
+    </div>
+    <input type="submit" value="Оформить заказ" class="btn btn-primary">
+</form>
+</div>
+</div>
+{% endblock %}

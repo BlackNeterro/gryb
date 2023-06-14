@@ -1,0 +1,11 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>Добавить в корзину</h2>
+  <form method="post" action="{% url 'gryb_app:add_to_cart' pk=product.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить в корзину</button>
+</form>
+{% endblock %}

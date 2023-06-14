@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Order</title>
+</head>
+<body>
+    <h2>Новый заказ</h2>
+    <p>Получен новый заказ с информацией о заказчике, товарах и общей стоимости:</p>
+    
+    <h3>Информация о заказчике:</h3>
+    <p>Имя: {{ order.user.name }}</p>
+    <p>Email: {{ order.user.email }}</p>
+    <p>Номер телефона: {{ order.user.phone_number }}</p>
+    <p>Адрес: {{ order.user.address }}</p>
+    
+    <h3>Товары в корзине:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Наименование</th>
+                <th>Количество</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.item.name }}</td>
+                <td>{{ item.quantity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <p>Общая стоимость: {{ total }}</p>
+</body>
+</html>

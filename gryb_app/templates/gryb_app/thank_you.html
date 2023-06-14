@@ -1,0 +1,17 @@
+{% extends 'gryb_app/base.html' %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container">
+    <div class="card-wrapper">
+        <h1>Благодарим вас за заказ!</h1>
+        <p>Ваш заказ был успешно оформлен.</p>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'gryb_app:home' %}";  // перенаправление на главную страницу
+    }, 3000);  // 3000 миллисекунд = 3 секунды
+</script>
+{% endblock %}

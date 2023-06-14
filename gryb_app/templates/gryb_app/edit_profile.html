@@ -1,0 +1,16 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+<div class="container">
+  <div class="card-wrapper">
+  <h2>Редактирование профиля</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn item-btn btn-secondary display-7">Сохранить изменения</button>
+  </form>
+  </div>
+</div>
+{% endblock %}

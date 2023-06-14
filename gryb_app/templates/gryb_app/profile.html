@@ -1,0 +1,20 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br><br>
+  <h2>Профиль пользователя</h2>
+  <p>Имя пользователя: {{ user.username }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>Номер телефона: {{ user.phone_number }}</p>
+  <p>Адрес: {{ user.address }}</p>
+  
+  <a id="redirect-link" href="{% url 'gryb_app:edit_profile' %}" class="btn btn-primary">Изменить профиль</a>
+
+  <script>
+    setTimeout(function() {
+      // Выполнить перенаправление на главную страницу
+      window.location.href = "{% url 'gryb_app:home' %}";  // Замените 'gryb_app:index' на ваше имя URL-шаблона для главной страницы
+    }, 20);
+  </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'gryb_app/base.html' %}
+{% load static %}
+
+{% block content %}
+<br><br><br>
+<div class="container">
+  <h2>Хотите удалить товары</h2>
+  <p>Вы точно хотте удалть товары?</p>
+  
+  <div class="item">
+    <h4>{{ cart_item.item.name }}</h4>
+    <p>Колчество: {{ cart_item.quantity }}</p>
+  </div>
+  
+  <form action="{% url 'gryb_app:remove_from_cart' cart_item.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Удалть</button>
+    <br>
+
+    <a href="{% url 'gryb_app:cart' %}" class="btn btn-secondary my-custom-btn">Отмена</a>
+  </form>
+</div>
+{% endblock %}

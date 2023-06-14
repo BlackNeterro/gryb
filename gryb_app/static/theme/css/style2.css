@@ -1,0 +1,91 @@
+
+/* Стили для карусели */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Укажите высоту, соответствующую вашим потребностям */
+    overflow: hidden;
+  }
+  
+  .carousel .carousel-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .carousel .carousel-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  
+  .carousel .carousel-item.active {
+    opacity: 1;
+  }
+  
+  /* Стили для управляющих элементов карусели (стрелки, индикаторы) */
+  .carousel .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    color: #fff;
+    font-size: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+  
+  .carousel .carousel-control.left {
+    left: 10px;
+  }
+  
+  .carousel .carousel-control.right {
+    right: 10px;
+  }
+  
+  .carousel .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .carousel .carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .carousel .carousel-indicators li.active {
+    background-color: #fff;
+  }
+  
+  /* Дополнительные стили по желанию */
+  .carousel .carousel-caption {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  #myCarousel {
+    width: 100%; /* Занимает всю доступную ширину */
+    height: auto; /* Автоматический расчет высоты на основе содержимого */
+  }
