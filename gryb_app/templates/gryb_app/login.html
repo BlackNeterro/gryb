@@ -2,19 +2,18 @@
 {% load static %}
 
 {% block content %}
-<br><br><br>
+<br><br><br><br>
 <div class="container">
-  <div class="card-wrapper">
-    <br><br><br>
+  <div class="card-wrapper" style="margin: 0 auto; width: 300px;">
     <h2>Вход</h2>
-    <form method="post">
+    <br>
+    <form method="post" >
       {% csrf_token %}
       {{ form.as_p }}
-    
-    <button type="submit" class="btn item-btn btn-secondary display-7">Войти</button>
-  <br>
-    <p>Еще не зарегистрированы? <a href="{% url 'gryb_app:registration' %}"  class="btn btn-secondary my-custom-btn">Регистрация</a></p>
-  </form>
+      <button type="submit" class="btn item-btn btn-secondary display-7">Войти</button>
+      <br>
+      <p>Еще не зарегистрированы? <a href="{% url 'gryb_app:registration' %}" class="btn btn-secondary my-custom-btn">Регистрация</a></p>
+    </form>
   </div>
 </div>
 {% endblock %}

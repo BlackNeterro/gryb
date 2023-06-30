@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser,BaseUserManager, Group as AuthGroup, Permission as AuthPermission
 from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager
+from embed_video.fields import EmbedVideoField
 
 
 class CarouselImage(models.Model):
@@ -107,3 +108,5 @@ class Comment(models.Model):
     
     # superuser = CustomUserManager().create_superuser(email='admin@example.com', password='password')
 
+class Video(models.Model):
+    youtube_link = EmbedVideoField() 

@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Product, CarouselImage, Cart, Order, Comment
+from .models import User, Product, CarouselImage, Cart, Order, Comment, Video
 
 admin.site.register(Product)
 admin.site.register(CarouselImage)
 admin.site.register(Cart)
 admin.site.register(Order)
 admin.site.register(Comment)
+admin.site.register(Video)
 
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -19,3 +20,4 @@ class CustomUserAdmin(UserAdmin):
 )
 
 admin.site.register(User, CustomUserAdmin)
+

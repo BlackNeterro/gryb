@@ -13,6 +13,7 @@ from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.http import HttpResponse
+from .models import Video
 
 def registration(request):
     if request.method == 'POST':
@@ -223,3 +224,10 @@ def checkout(request):
         form = OrderForm()
 
     return render(request, 'gryb_app/checkout.html', {'cart_items': cart_items, 'total': total, 'form': form})
+
+def video_view(request):
+    video = Video.objects.get(pk=1)  # Получение объекта видео из базы данных
+    return render(request, 'gryb_app/home.html', {'video': video})
+
+def abaut(request):
+    return render(request, 'gryb_app/abaut.html')
