@@ -2,17 +2,101 @@
 {% load static %}
 
 {% block content %}
+<style>
+  .form-group label {
+    position: relative;
+  }
+  
+  .form-group label span {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 5px;
+    color: #999999;
+    font-style: italic;
+  }
+  
+  .form-group input:focus + span {
+    display: none;
+  }
+</style>
+
 <div class="container">
   <br><br><br><br>
   <div class="item-content text-center">
     <h2 class="item-title mbr-fonts-style display-7">Регистрация</h2>
     <form method="POST" action="{% url 'gryb_app:registration' %}">
       {% csrf_token %}
-      {{ form.as_p }}
+      
+      <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">
+          <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" required>
+          <span>Имя:</span>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">
+          <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" required>
+          <span>Емайл:</span>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.phone_number.id_for_label }}">
+          <input type="text" name="{{ form.phone_number.name }}" id="{{ form.phone_number.id_for_label }}" required>
+          <span>Ваш номер телефона:</span>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.address.id_for_label }}">
+          <input type="text" name="{{ form.address.name }}" id="{{ form.address.id_for_label }}" required>
+          <span>Ваш адрес:</span>
+        </label>
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">
+          <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" required>
+          <span>Пароль:</span>
+        </label>
+      </div>
+      
+      <div class="text-box">
+        <span class="icon-text mbr-black mbr-fonts-style display-4">
+          Пароль не должен быть слишком похож на другую вашу личную информацию.<br>
+          Ваш пароль должен содержать как минимум 8 символов.<br>
+          Пароль не должен быть слишком простым и распространенным.<br>
+          Пароль не может состоять только из цифр.&nbsp;</span>
+    </div>
+
+      <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">
+          <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" required>
+          <span>Повторите пароль:</span>
+        </label>
+      </div>
+      
       <button type="submit" class="btn item-btn btn-secondary display-7" style="margin: 0 auto; width: 600px;">Зарегистрироваться</button>
     </form>
     <br>
     <p><a href="{% url 'gryb_app:login' %}" class="btn item-btn btn-secondary display-7">Вход</a> Уже зарегистрированы? </p>
   </div>
 </div>
+
+<script>
+  const inputFields = document.querySelectorAll('.form-group input');
+  
+  inputFields.forEach(input => {
+    input.addEventListener('input', function() {
+      if (this.value.length > 0) {
+        this.nextElementSibling.style.display = 'none';
+      } else {
+        this.nextElementSibling.style.display = 'inline-block';
+      }
+    });
+  });
+</script>
 {% endblock %}
