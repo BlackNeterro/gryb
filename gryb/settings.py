@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.template',
     'gryb_app',
     'embed_video',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'gryb.urls'
@@ -83,7 +85,17 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'gryb_db',
+    #     'USER': 'gryb',
+    #     'PASSWORD': '!@#Drago123',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
 }
+
 
 
 # Password validation
@@ -169,3 +181,19 @@ AUTHENTICATION_BACKENDS = [
 #         'level': 'DEBUG',
 #     },
 # }
+
+CORS_ALLOWED_ORIGINS = [
+    'https://gryb.kz',
+    'https://test.gryb.kz',
+    # 'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
