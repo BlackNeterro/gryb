@@ -27,8 +27,8 @@
   <div class="item-content text-center">
     <h2 class="item-title mbr-fonts-style display-7">Регистрация</h2>
     <form method="POST" action="{% url 'gryb_app:registration' %}">
-      <!-- {% csrf_token %} -->
-    
+      {% csrf_protect %}
+      
       <div class="form-group">
         <label for="{{ form.name.id_for_label }}">
           <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" required>
