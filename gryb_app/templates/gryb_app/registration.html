@@ -1,5 +1,6 @@
 {% extends 'gryb_app/base.html' %}
 {% load static %}
+{% load csrf %}
 
 {% block content %}
 <style>
@@ -27,7 +28,7 @@
   <div class="item-content text-center">
     <h2 class="item-title mbr-fonts-style display-7">Регистрация</h2>
     <form method="POST" action="{% url 'gryb_app:registration' %}">
-      {% csrf_protect %}
+      {% csrf_token %}
       
       <div class="form-group">
         <label for="{{ form.name.id_for_label }}">
