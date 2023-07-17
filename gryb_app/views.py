@@ -14,9 +14,9 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.http import HttpResponse
 from .models import Video
-from django.views.decorators.csrf import csrf_protect
+# from django.views.decorators.csrf import csrf_protect
 
-@csrf_protect
+# @csrf_protect
 def registration(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
